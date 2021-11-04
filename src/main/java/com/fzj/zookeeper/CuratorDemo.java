@@ -21,7 +21,7 @@ public class CuratorDemo {
         byte[] bytes = curatorFramework.getData().storingStatIn(stat).forPath(NODE);
         System.out.println(new String(bytes));
         //查询子节点列表
-        List<String> strings = curatorFramework.getChildren().storingStatIn(stat).forPath(NODE2);
+        List<String> strings = curatorFramework.getChildren().storingStatIn(stat).forPath(ROOT);
         System.out.println(strings);
         curatorFramework.close();
     }

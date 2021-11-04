@@ -1,9 +1,8 @@
 package com.fzj.zookeeper;
 
 import static com.fzj.zookeeper.Constants.IP;
-import org.apache.zookeeper.WatchedEvent;
-import org.apache.zookeeper.Watcher;
-import org.apache.zookeeper.ZooKeeper;
+import static com.fzj.zookeeper.Constants.WATCHER;
+import org.apache.zookeeper.*;
 
 import java.util.concurrent.CountDownLatch;
 
@@ -23,6 +22,12 @@ public class ConnectDemo {
             countDownLatch.await();
             //CONNECTED
             System.out.println(zooKeeper.getState());
+
+            //创建
+            if (zooKeeper.exists(WATCHER, false) == null) {
+                zooKeeper.create(WATCHER, "0".getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
+            }
+            zooKeeper.delete(WATCHER, 0);
 
         } catch (Throwable ignored) {
 
